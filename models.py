@@ -8,3 +8,7 @@ class JewelryItem:
     def __str__(self):
         return (f"{self.name} | {self.material} | {self.price} UAH |"
                 f" {self.quantity} {'pc' if self.quantity == 1 else 'pcs'}")
+
+    def sell(self, quantity_to_sell):
+        self.quantity -= quantity_to_sell
+        return quantity_to_sell * self.price
