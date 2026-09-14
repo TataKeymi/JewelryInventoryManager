@@ -28,3 +28,19 @@ class JewelryItem:
             )
         self.quantity -= quantity_to_sell
         return quantity_to_sell * self.price
+
+class Ring(JewelryItem):
+    def __init__(self, name, material, price, quantity, size):
+        super().__init__(name, material, price, quantity)
+        self.size = size
+
+    def __str__(self):
+        return super().__str__() + f" | {self.size}"
+
+class Earrings(JewelryItem):
+    def __init__(self, name, material, price, quantity, fastening_type):
+        super().__init__(name, material, price, quantity)
+        self.fastening_type = fastening_type
+
+    def __str__(self):
+        return super().__str__() + f" | {self.fastening_type}"
