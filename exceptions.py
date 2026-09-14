@@ -1,0 +1,6 @@
+class InsufficientStockError(Exception):
+    """Raised when quantity to sell is greater than quantity in stock."""
+
+
+class InvalidSaleQuantityError(Exception):
+    """Raised when quantity to sell is less than or equal to 0."""
