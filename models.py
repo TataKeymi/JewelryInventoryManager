@@ -1,24 +1,17 @@
 from exceptions import (InsufficientStockError,
-                        InvalidSaleQuantityError,
-                        InvalidPriceError)
+                        InvalidSaleQuantityError)
+
+from descriptors import PositivePrice
 
 
 class JewelryItem:
+    price = PositivePrice()
+
     def __init__(self, name, material, price, quantity):
         self.name = name
         self.material = material
         self.price = price
         self.quantity = quantity
-
-    @property
-    def price(self):
-        return self._price
-
-    @price.setter
-    def price(self, price):
-        if price <= 0:
-            raise InvalidPriceError("Price must be greater than 0.")
-        self._price = price
 
     def __str__(self):
         return (f"{self.name} | {self.material} | {self.price} UAH |"
