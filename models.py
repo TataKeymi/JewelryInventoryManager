@@ -1,4 +1,6 @@
-from exceptions import InsufficientStockError, InvalidSaleQuantityError
+from exceptions import (InsufficientStockError,
+                        InvalidSaleQuantityError,
+                        InvalidPriceError)
 
 
 class JewelryItem:
@@ -7,6 +9,16 @@ class JewelryItem:
         self.material = material
         self.price = price
         self.quantity = quantity
+
+    @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self, price):
+        if price <= 0:
+            raise InvalidPriceError("Price must be greater than 0.")
+        self._price = price
 
     def __str__(self):
         return (f"{self.name} | {self.material} | {self.price} UAH |"
