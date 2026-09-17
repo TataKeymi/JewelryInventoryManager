@@ -1,5 +1,8 @@
 from models import JewelryItem, Ring, Earrings
 
+from storage import save_inventory
+
+
 items = [
     JewelryItem(
         name="Jewelry",
@@ -30,3 +33,22 @@ def show_inventory(items):
 
 
 show_inventory(items)
+
+
+items_to_save = []
+
+for item in items:
+    item_data = {
+        "name": item.name,
+        "material": item.material,
+        "price": item.price,
+        "quantity": item.quantity
+    }
+    if isinstance(item, Ring):
+        item_data["size"] = item.size
+    if isinstance(item, Earrings):
+        item_data["fastening_type"] = item.fastening_type
+    items_to_save.append(item_data)
+
+
+save_inventory(items_to_save, "inventory.json")
