@@ -5,6 +5,8 @@ from descriptors import PositivePrice
 
 
 class JewelryItem:
+    __slots__ = ("name", "material", "_price", "quantity")
+
     price = PositivePrice()
 
     def __init__(self, name, material, price, quantity):
@@ -31,6 +33,8 @@ class JewelryItem:
 
 
 class Ring(JewelryItem):
+    __slots__ = ("size",)
+
     def __init__(self, name, material, price, quantity, size):
         super().__init__(name, material, price, quantity)
         self.size = size
@@ -40,9 +44,12 @@ class Ring(JewelryItem):
 
 
 class Earrings(JewelryItem):
+    __slots__ = ("fastening_type",)
+
     def __init__(self, name, material, price, quantity, fastening_type):
         super().__init__(name, material, price, quantity)
         self.fastening_type = fastening_type
 
     def __str__(self):
         return super().__str__() + f" | {self.fastening_type}"
+
