@@ -3,6 +3,8 @@ from exceptions import (InsufficientStockError,
 
 from descriptors import PositivePrice
 
+from decorators import log_action
+
 
 class JewelryItem:
     __slots__ = ("name", "material", "_price", "quantity")
@@ -19,6 +21,7 @@ class JewelryItem:
         return (f"{self.name} | {self.material} | {self.price} UAH |"
                 f" {self.quantity} {'pc' if self.quantity == 1 else 'pcs'}")
 
+    @log_action("SALE")
     def sell(self, quantity_to_sell):
         if quantity_to_sell > self.quantity:
             raise InsufficientStockError(
