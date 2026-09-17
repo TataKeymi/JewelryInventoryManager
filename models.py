@@ -21,6 +21,9 @@ class JewelryItem:
         return (f"{self.name} | {self.material} | {self.price} UAH |"
                 f" {self.quantity} {'pc' if self.quantity == 1 else 'pcs'}")
 
+    def __repr__(self):
+        return self.__str__()
+
     @log_action("SALE")
     def sell(self, quantity_to_sell):
         if quantity_to_sell > self.quantity:
@@ -50,6 +53,9 @@ class Ring(DiscountMixin, JewelryItem):
     def __str__(self):
         return super().__str__() + f" | {self.size}"
 
+    def __repr__(self):
+        return self.__str__()
+
 
 class Earrings(JewelryItem):
     __slots__ = ("fastening_type",)
@@ -60,3 +66,6 @@ class Earrings(JewelryItem):
 
     def __str__(self):
         return super().__str__() + f" | {self.fastening_type}"
+
+    def __repr__(self):
+        return self.__str__()
