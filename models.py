@@ -32,7 +32,12 @@ class JewelryItem:
         return quantity_to_sell * self.price
 
 
-class Ring(JewelryItem):
+class DiscountMixin:
+    def apply_discount(self, percent):
+        self.price = self.price * (100 - percent) / 100
+
+
+class Ring(DiscountMixin, JewelryItem):
     __slots__ = ("size",)
 
     def __init__(self, name, material, price, quantity, size):
@@ -52,4 +57,3 @@ class Earrings(JewelryItem):
 
     def __str__(self):
         return super().__str__() + f" | {self.fastening_type}"
-
