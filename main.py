@@ -1,6 +1,6 @@
 from models import JewelryItem, Ring, Earrings
 
-from storage import save_inventory
+from storage import save_inventory, load_inventory
 
 
 items = [
@@ -32,7 +32,7 @@ def show_inventory(items):
         print(item)
 
 
-show_inventory(items)
+# show_inventory(items)
 
 
 items_to_save = []
@@ -51,4 +51,7 @@ for item in items:
     items_to_save.append(item_data)
 
 
-save_inventory(items_to_save, "inventory.json")
+# save_inventory(items_to_save, "inventory.json")
+
+items = load_inventory("inventory.json")
+print(items)
