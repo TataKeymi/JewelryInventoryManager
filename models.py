@@ -37,8 +37,18 @@ class JewelryItem:
         self.quantity -= quantity_to_sell
         return quantity_to_sell * self.price
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "material": self.material,
+            "price": self.price,
+            "quantity": self.quantity,
+        }
+
 
 class DiscountMixin:
+    slots = ()
+
     def apply_discount(self, percent):
         self.price = self.price * (100 - percent) / 100
 
@@ -53,8 +63,10 @@ class Ring(DiscountMixin, JewelryItem):
     def __str__(self):
         return super().__str__() + f" | {self.size}"
 
-    def __repr__(self):
-        return self.__str__()
+    def to_dict(self):
+        data = super().to_dict()
+        data["size"] = self.size
+        return data
 
 
 class Earrings(JewelryItem):
@@ -67,5 +79,7 @@ class Earrings(JewelryItem):
     def __str__(self):
         return super().__str__() + f" | {self.fastening_type}"
 
-    def __repr__(self):
-        return self.__str__()
+    def to_dict(self):
+        data = super().to_dict()
+        data["fastening_type"] = self.fastening_type
+        return data
