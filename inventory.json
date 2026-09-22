@@ -1,22 +1,25 @@
 [
     {
+        "type": "JewelryItem",
         "name": "Jewelry",
         "material": "silver",
         "price": 10,
         "quantity": 5
     },
     {
+        "type": "Ring",
         "name": "Ring",
         "material": "gold",
         "price": 200,
-        "quantity": 5,
+        "quantity": 2,
         "size": 18
     },
     {
+        "type": "Earrings",
         "name": "Earrings",
         "material": "silver",
         "price": 10,
-        "quantity": 5,
+        "quantity": 0,
         "fastening_type": "stud"
     }
 ]

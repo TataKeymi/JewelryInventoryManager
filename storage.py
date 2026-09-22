@@ -14,10 +14,11 @@ def load_inventory(filename):
         items = json.load(file)
         loaded_items = []
         for item in items:
-            if "size" in item:
+            item_type = item.pop("type")
+            if item_type == "Ring":
                 loaded_items.append(Ring(**item))
-            elif "fastening_type" in item:
+            elif item_type == "Earrings":
                 loaded_items.append(Earrings(**item))
-            else:
+            elif item_type == "JewelryItem":
                 loaded_items.append(JewelryItem(**item))
         return loaded_items

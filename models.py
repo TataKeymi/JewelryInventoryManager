@@ -39,6 +39,7 @@ class JewelryItem:
 
     def to_dict(self):
         return {
+            "type": self.__class__.__name__,
             "name": self.name,
             "material": self.material,
             "price": self.price,
