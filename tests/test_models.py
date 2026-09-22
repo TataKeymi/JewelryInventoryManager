@@ -162,21 +162,38 @@ def test_save_inventory(tmp_path):
             price=200,
             quantity=5,
             size=18
+        ),
+        Earrings(
+            name="Earrings",
+            material="silver",
+            price=10,
+            quantity=2,
+            fastening_type="stud"
         )
     ]
     expected_result = [
         {
+            "type": "JewelryItem",
             "name": "Jewelry",
             "material": "silver",
             "price": 10,
             "quantity": 5
         },
         {
+            "type": "Ring",
             "name": "Ring",
             "material": "gold",
             "price": 200,
             "quantity": 5,
             "size": 18
+        },
+        {
+            "type": "Earrings",
+            "name": "Earrings",
+            "material": "silver",
+            "price": 10,
+            "quantity": 2,
+            "fastening_type": "stud"
         }
     ]
     file_path = tmp_path / "inventory.json"
@@ -190,31 +207,47 @@ def test_load_inventory(tmp_path):
     file_path = tmp_path / "inventory.json"
     file_items = [
         {
+            "type": "JewelryItem",
             "name": "Jewelry",
             "material": "silver",
             "price": 10,
             "quantity": 5
         },
         {
+            "type": "Ring",
             "name": "Ring",
             "material": "gold",
             "price": 200,
             "quantity": 5,
             "size": 18
+        },
+        {
+            "type": "Earrings",
+            "name": "Earrings",
+            "material": "silver",
+            "price": 10,
+            "quantity": 2,
+            "fastening_type": "stud"
         }
     ]
     with open(file_path, "w", encoding="utf-8") as file:
         json.dump(file_items, file, indent=4)
     loaded_items = load_inventory(file_path)
-    assert len(loaded_items) == 2
+    assert len(loaded_items) == 3
     assert isinstance(loaded_items[0], JewelryItem)
     assert isinstance(loaded_items[1], Ring)
+    assert isinstance(loaded_items[2], Earrings)
     assert loaded_items[0].name == "Jewelry"
     assert loaded_items[1].name == "Ring"
+    assert loaded_items[2].name == "Earrings"
     assert loaded_items[0].material == "silver"
     assert loaded_items[1].material == "gold"
+    assert loaded_items[2].material == "silver"
     assert loaded_items[0].price == 10
     assert loaded_items[1].price == 200
+    assert loaded_items[2].price == 10
     assert loaded_items[0].quantity == 5
     assert loaded_items[1].quantity == 5
+    assert loaded_items[2].quantity == 2
     assert loaded_items[1].size == 18
+    assert loaded_items[2].fastening_type == "stud"
