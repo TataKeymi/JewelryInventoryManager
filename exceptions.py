@@ -12,3 +12,7 @@ class InvalidPriceError(Exception):
 
 class UnknownJewelryTypeError(Exception):
     """Raised when an unknown jewelry type is requested."""
+
+
+class InvalidDiscountError(Exception):
+    """Raised when discount is less than or equal to 0 or greater than or equal to 100."""

@@ -1,5 +1,6 @@
 from exceptions import (InsufficientStockError,
-                        InvalidSaleQuantityError)
+                        InvalidSaleQuantityError,
+                        InvalidDiscountError)
 
 from descriptors import PositivePrice
 
@@ -52,9 +53,15 @@ class JewelryItem:
 
 
 class DiscountMixin:
-    slots = ()
+    __slots__ = ()
+
+    @staticmethod
+    def validate_discount(percent):
+        return 0 < percent < 100
 
     def apply_discount(self, percent):
+        if not self.validate_discount(percent):
+            raise InvalidDiscountError("Discount percentage must be between 0 and 100.")
         self.price = self.price * (100 - percent) / 100
 
 
