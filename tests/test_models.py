@@ -4,7 +4,7 @@ import pytest
 
 from exceptions import (InsufficientStockError,
                         InvalidSaleQuantityError,
-                        InvalidPriceError)
+                        InvalidPriceError, UnknownJewelryTypeError)
 
 from inventory import low_stock_items
 
@@ -251,3 +251,20 @@ def test_load_inventory(tmp_path):
     assert loaded_items[2].quantity == 2
     assert loaded_items[1].size == 18
     assert loaded_items[2].fastening_type == "stud"
+
+
+def test_load_inventory_error(tmp_path):
+    file_path = tmp_path / "inventory.json"
+    file_items = [
+        {
+            "type": "Bracelet",
+            "name": "Jewelry",
+            "material": "silver",
+            "price": 10,
+            "quantity": 5
+        }
+    ]
+    with open(file_path, "w", encoding="utf-8") as file:
+        json.dump(file_items, file, indent=4)
+    with pytest.raises(UnknownJewelryTypeError, match="Unknown item type"):
+        load_inventory(file_path)

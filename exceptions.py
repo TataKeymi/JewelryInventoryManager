@@ -8,3 +8,7 @@ class InvalidSaleQuantityError(Exception):
 
 class InvalidPriceError(Exception):
     """Raised when price is less than or equal to 0."""
+
+
+class UnknownJewelryTypeError(Exception):
+    """Raised when an unknown jewelry type is requested."""

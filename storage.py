@@ -2,6 +2,8 @@ import json
 
 from models import JewelryItem, Ring, Earrings
 
+from exceptions import UnknownJewelryTypeError
+
 
 def save_inventory(items, filename):
     items_to_save = [item.to_dict() for item in items]
@@ -21,4 +23,6 @@ def load_inventory(filename):
                 loaded_items.append(Earrings(**item))
             elif item_type == "JewelryItem":
                 loaded_items.append(JewelryItem(**item))
+            else:
+                raise UnknownJewelryTypeError(f"Unknown item type: {item_type}")
         return loaded_items
