@@ -4,7 +4,9 @@ import pytest
 
 from exceptions import (InsufficientStockError,
                         InvalidSaleQuantityError,
-                        InvalidPriceError, UnknownJewelryTypeError)
+                        InvalidPriceError,
+                        UnknownJewelryTypeError,
+                        InvalidDiscountError)
 
 from inventory import low_stock_items
 
@@ -268,3 +270,22 @@ def test_load_inventory_error(tmp_path):
         json.dump(file_items, file, indent=4)
     with pytest.raises(UnknownJewelryTypeError, match="Unknown item type"):
         load_inventory(file_path)
+
+@pytest.mark.parametrize(
+    "percent",
+    [
+        0,
+        -10,
+        100
+    ]
+)
+def test_discount_error_for_ring(percent):
+    ring = Ring(
+        name="test",
+        material="test",
+        price=1000,
+        quantity=5,
+        size=16.5
+    )
+    with pytest.raises(InvalidDiscountError):
+        ring.apply_discount(percent)
