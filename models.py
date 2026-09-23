@@ -46,6 +46,10 @@ class JewelryItem:
             "quantity": self.quantity,
         }
 
+    @classmethod
+    def from_dict(cls, data):
+        return cls(**data)
+
 
 class DiscountMixin:
     slots = ()
@@ -84,3 +88,18 @@ class Earrings(JewelryItem):
         data = super().to_dict()
         data["fastening_type"] = self.fastening_type
         return data
+
+
+data = {
+    "name": "Jewelry",
+    "material": "silver",
+    "price": 100,
+    "quantity": 5,
+}
+
+item = JewelryItem.from_dict(data)
+item2 = JewelryItem("jewelry", "gold", 100, 10)
+
+print(type(item))
+# JewelryItem
+print(type(item2))

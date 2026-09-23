@@ -18,11 +18,11 @@ def load_inventory(filename):
         for item in items:
             item_type = item.pop("type")
             if item_type == "Ring":
-                loaded_items.append(Ring(**item))
+                loaded_items.append(Ring.from_dict(item))
             elif item_type == "Earrings":
-                loaded_items.append(Earrings(**item))
+                loaded_items.append(Earrings.from_dict(item))
             elif item_type == "JewelryItem":
-                loaded_items.append(JewelryItem(**item))
+                loaded_items.append(JewelryItem.from_dict(item))
             else:
                 raise UnknownJewelryTypeError(f"Unknown item type: {item_type}")
         return loaded_items
