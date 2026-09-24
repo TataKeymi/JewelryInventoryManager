@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 from exceptions import (InsufficientStockError,
                         InvalidSaleQuantityError,
                         InvalidDiscountError)
@@ -7,7 +9,15 @@ from descriptors import PositivePrice
 from decorators import log_action
 
 
-class JewelryItem:
+class JewelryBase(ABC):
+    __slots__ = ()
+
+    @abstractmethod
+    def to_dict(self):
+        pass
+
+
+class JewelryItem(JewelryBase):
     __slots__ = ("name", "material", "_price", "quantity")
 
     price = PositivePrice()
